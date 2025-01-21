@@ -1,15 +1,17 @@
-# Bitcoin Multi-Signature Transaction Library
+# Bitcoin Transaction Library
 
-This library provides tools for creating and signing Bitcoin transactions, with a focus on multi-signature (multisig) functionality. It supports both single-signature and multi-signature transactions using BitcoinJS and Bitcore libraries.
+This library provides comprehensive tools for Bitcoin transaction management, including address generation, single/multi-signature transactions, and various address type support. Built using BitcoinJS and Bitcore libraries.
 
 ## Features
 
-- Create and sign standard Bitcoin transactions
-- Multi-signature transaction support (2-of-3, 3-of-5, etc.)
+- Address generation for P2PKH, P2SH, P2WPKH formats
+- Multi-signature transaction support (m-of-n)
+- Single-signature transaction support
 - Testnet and Mainnet support
 - PSBT (Partially Signed Bitcoin Transaction) implementation
-- Address generation and validation
 - BIP32 hierarchical deterministic wallet support
+- Support for legacy and SegWit address formats
+- Multi-signature address creation
 
 ## Installation
 
@@ -23,15 +25,39 @@ npm install
 
 ```typescript
 import { 
+  createAddress,
+  createMultiSignAddress,
   buildAndSignTx,
-  buildUnsignTxAndSign,
-  buildUnsignTxAndSign2 
-} from './src/sign';
+  buildMultisigTx,
+  signMultisigTx
+} from './src';
 ```
 
-### Creating a Single-Signature Transaction
+### Address Generation
 
 ```typescript
+// Single-signature address
+const address = createAddress({
+  seedHex: 'your-seed-hex',
+  receiveOrChange: '0', // 0 for receive, 1 for change
+  addressIndex: 0,
+  network: 'testnet',
+  method: 'p2pkh' // or 'p2sh', 'p2wpkh'
+});
+
+// Multi-signature address
+const multisigAddress = createMultiSignAddress({
+  pubkeys: ['pubkey1', 'pubkey2', 'pubkey3'],
+  network: 'testnet',
+  method: 'p2sh',
+  threshold: 2 // 2-of-3
+});
+```
+
+### Transaction Creation
+
+```typescript
+// Single-signature transaction
 const signedTx = buildAndSignTx({
   privateKey: 'your-private-key',
   signObj: {
@@ -40,31 +66,42 @@ const signedTx = buildAndSignTx({
   },
   network: 'testnet'
 });
-```
 
-### Creating a Multi-Signature Transaction
-
-```typescript
-const signedTx = buildUnsignTxAndSign2({
-  keyPair: 'your-private-key',
+// Multi-signature transaction
+const psbt = buildMultisigTx({
+  pubKeys: ['pubkey1', 'pubkey2', 'pubkey3'],
   signObj: {
     inputs: [...],
     outputs: [...]
   },
-  network: 'testnet'
+  network: 'testnet',
+  requiredSignaturesNumbers: 2 // 2-of-3
 });
+
+// Sign multi-signature transaction
+const signedTx = signMultisigTx(psbt, ['privateKey1', 'privateKey2'], 'testnet');
 ```
 
 ## API Documentation
 
-### buildAndSignTx(params)
+### Address Functions
+
+#### createAddress(params)
+Creates a single-signature address with specified parameters.
+
+#### createMultiSignAddress(params)
+Creates a multi-signature address with specified parameters.
+
+### Transaction Functions
+
+#### buildAndSignTx(params)
 Creates and signs a standard Bitcoin transaction.
 
-### buildUnsignTxAndSign(params)
-Creates and signs a multi-signature transaction (2-of-2).
+#### buildMultisigTx(params)
+Creates a multi-signature PSBT transaction.
 
-### buildUnsignTxAndSign2(params)
-Creates and signs a multi-signature transaction with flexible signing requirements.
+#### signMultisigTx(psbt, keyPairs, network)
+Signs a multi-signature PSBT transaction.
 
 ## Testing
 
