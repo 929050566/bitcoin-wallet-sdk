@@ -1,6 +1,6 @@
-import { createMnemonic } from '../sdk/bip39';
+import { createMnemonic } from '../../sdk/bip39';
 import * as bip39 from 'bip39';
-import {createAddress,createMultiSignAddress } from "../src/address";
+import {createAddress,createMultiSignAddress } from "../../src/bitcoin/address";
 import * as assert from 'assert';
 
 
@@ -35,6 +35,24 @@ describe('btc unit test case', () => {
       assert.strictEqual(account2.privateKey, '291ca062f3c1fb3260bcba3e2dda8bb75484c1661433a143dbee660ead975e62');
       assert.strictEqual(account2.publicKey, '02fe5cb46b4057851d78440ebfe43769a546c3a2941a43f4c912aff4854f3f7fff');
   });
+
+  test('createEthereumAddress by p2pkh mainnet ', () => {
+    const mnemonic = "around dumb spend sample oil crane plug embrace outdoor panel rhythm salon";
+    const seed = bip39.mnemonicToSeedSync(mnemonic, "")
+    const param = {
+        seedHex: seed.toString("hex"),
+        receiveOrChange: "0",
+        addressIndex: "0",
+        network: "mainnet",
+        method: "p2pkh",
+        path: "m/44'/60'/0'/0/0"
+    }
+    const account1 = createAddress(param)
+    console.log("account1==", account1)
+    assert.strictEqual(account1.address, '138CBAx3KaS6yq77RCCtoCvP3viUtni6T7');
+    assert.strictEqual(account1.privateKey, 'c539a16d74b731e11da642f25fb8e86a1489647839ab413327f3cc529fa60079');
+    assert.strictEqual(account1.publicKey, '022505a03b55f896c0948f35a2c63b46f6a4cdb8221164bc27bb9980617dacbce7');
+});
 
   test('createAddress by p2pkh testnet', () => {
       const mnemonic = "around dumb spend sample oil crane plug embrace outdoor panel rhythm salon";

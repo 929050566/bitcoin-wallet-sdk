@@ -1,4 +1,4 @@
-import { buildMultisigTx, signMultisigTx, buildAndSignTx } from '../src/sign';
+import { buildMultisigTx, signMultisigTx, buildAndSignTx } from '../../src/bitcoin/sign';
 import * as bitcoin from 'bitcoinjs-lib';
 
 describe('Bitcoin Transaction Tests', () => {

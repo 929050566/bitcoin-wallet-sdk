@@ -8,7 +8,7 @@ import {
     mnemonicToSeed,
     mnemonicToSeedSync,
     validateMnemonic
-} from "../sdk/bip39";
+} from "../../sdk/bip39";
 
 
 describe('bip39 test case', () => {
