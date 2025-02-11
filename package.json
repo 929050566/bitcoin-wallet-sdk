@@ -6,11 +6,17 @@
   },
   "homepage": "https://github.com/the-web3/bitcoin-sdk-lite#readme",
   "dependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "axios": "^1.7.9",
     "bip32": "^4.0.0",
     "bip39": "^3.0.4",
     "bitcoinjs-lib": "^6.1.7",
     "bitcore-lib": "^8.25.31",
     "ecpair": "^2.1.0",
+    "ethers": "^5.6.9",
+    "bignumber.js": "9.0.1",
+    "@ethereumjs/common": "2.4.0",
+    "@ethereumjs/tx": "3.2.1",
     "tiny-secp256k1": "^2.2.3"
   },
   "devDependencies": {
