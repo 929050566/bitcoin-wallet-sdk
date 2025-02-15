@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { buildMultisigTx, signMultisigTx, buildAndSignTx } from '../../src/bitcoin/sign';
 import * as bitcoin from 'bitcoinjs-lib';
 
@@ -70,6 +71,7 @@ describe('Bitcoin Transaction Tests', () => {
       expect(rawHex).toBeDefined();
       expect(rawHex.length).toBeGreaterThan(0);
       expect(rawHex).toMatch(/^[0-9a-fA-F]+$/);
+      console.log('rawHex==', rawHex);
     });
   })
 });
