@@ -10,6 +10,8 @@ const Secp256k1 = elliptic.ec('secp256k1');
 // init ECC lib
 bitcoin.initEccLib(ecc);
 
+const chianList = ["doge", "ltc", "btc", "bch", "bsv"];
+
 const bchNetwork = {
     messagePrefix: '\x18Bitcoin Signed Message:\n',
     bech32: 'bc',
@@ -126,6 +128,10 @@ export async function createSchnorrAddress(params : any) {
 }
 
 export function createUtxoAddress(seedHex:string, receiveOrChange: "0"|"1", addressIndex:string, chain:string, typeAddress: string = 'p2pkh') {
+    if (!chianList.includes(chain)) {
+        throw new Error('Chain type invalid');
+    }
+    
     const root = bip32.fromSeed(Buffer.from(seedHex, 'hex'));
 
     // @ts-ignore
