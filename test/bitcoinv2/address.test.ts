@@ -1,6 +1,6 @@
 import * as bip39 from 'bip39';
 import * as assert from 'assert';
-import { createSchnorrAddress } from '../../src/bitcoinv2/address';
+import { createSchnorrAddress } from '../../src/bitcointaproot/address';
 
 
 

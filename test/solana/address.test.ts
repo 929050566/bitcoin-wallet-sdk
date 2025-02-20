@@ -20,8 +20,8 @@ describe('solana unit test case', () => {
 
 
     test('createAddressByMnoemonic', async () => {
-        // const params =  { mnemonic:"bus crowd gun upgrade educate barrel snap duck health bleak outer broken"} 
-        const params =  { mnemonic:"harvest laugh adjust scare buyer town nerve flat note bicycle aware disorder"} 
+        const params =  { mnemonic:"bus crowd gun upgrade educate barrel snap duck health bleak outer broken"} 
+        // const params =  { mnemonic:"harvest laugh adjust scare buyer town nerve flat note bicycle aware disorder"} 
         // const params = {mnemonic: "flip allow hammer valve elevator scrub inflict upon identify page orbit token"}
         const account = await createAddressByMnemonic(params);
         const {privateKey , publicKey, address} = account;
