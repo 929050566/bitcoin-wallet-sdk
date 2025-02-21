@@ -10,8 +10,8 @@ import {
     PublicKey,
     NonceAccount
   } from "@solana/web3.js";
-  import * as nacl from "tweetnacl";
-  import * as bs58 from "bs58";
+import * as nacl from "tweetnacl";
+import * as bs58 from "bs58";
 import BigNumber from "bignumber.js";
 import { number } from "bitcoinjs-lib/src/script";
 import * as SPLToken from "@solana/spl-token"
